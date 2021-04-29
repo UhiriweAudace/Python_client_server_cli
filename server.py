@@ -3,16 +3,12 @@ import socket, sys
 print("server waiting for client...\n")
 
 s = socket.socket()
-# host = socket.gethostname()
 host = "10.42.0.1"
 port = 65452
 s.bind((host, port))
-print(host,"\n")
-# name = input(str("Enter your name: "))
-           
 s.listen()
 conn, addr = s.accept()
-print("Received connection from ", addr[0], "(", addr[1], ")\n")
+print(str(f"Received connection from {addr[0]} ( {addr[1]} )"))
 
 while True:
     message = conn.recv(1024)
@@ -23,7 +19,7 @@ while True:
     msg_id = rcvd_message[1]
     msg_type = 'Response'
     message = f'Py|{msg_id}|{msg_type}|{input_message}'
-    if message == "quit":
+    if input_message == "quit":
         message = "Left chat room!"
         conn.send(message.encode())
         print("\n")
