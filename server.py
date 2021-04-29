@@ -2,12 +2,12 @@ import socket, sys
 
 print("server waiting for client...\n")
 
-s = socket.socket()
+server = socket.socket()
 host = "10.42.0.1"
 port = 65452
-s.bind((host, port))
-s.listen()
-conn, addr = s.accept()
+server.bind((host, port))
+server.listen()
+conn, addr = server.accept()
 print(str(f"Received connection from {addr[0]} ( {addr[1]} )"))
 
 while True:
