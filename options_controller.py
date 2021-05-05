@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
-
 """import different required packages"""
 import argparse
 import sys
 import platform
 from datetime import datetime
 from main_server import run_server
+
 
 def load_arguments_options():
     """This method will add different options on list in order to be used"""
