@@ -4,16 +4,17 @@ HOST = socket.gethostbyname(socket.gethostname())
 PORT = 65452
 SOCK = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+
 def run_server(packet_size):
     """ This method will run our chat server and will receive packet
         based on the specified packet size, by default will receive 1024 bytes
     """
     SOCK.bind((HOST, PORT))
-    print(HOST, "(", HOST, ")\n")
+    print(f"[host] - {HOST}")
 
     SOCK.listen()
     conn, addr = SOCK.accept()
-    print("Received connection from ", addr[0], "(", addr[1], ")\n")
+    print(f"[connection] - {addr[0]}:{addr[1]}\n")
     buffer_size_msg = f'My buffer size: {packet_size}'
     conn.send(buffer_size_msg.encode())
     client_message = ''
@@ -27,10 +28,10 @@ def run_server(packet_size):
             if msg_count == int(splitted_msg[1]):
                 continue
         except IndexError:
-            print("Client: ", client_message)
+            print("[Client]: ", client_message)
 
         client_message = ''
-        input_message = input(str("Server: "))
+        input_message = input(str("[Server]: "))
         message = str(input_message)
         message_parts = [message[i:i+packet_size]
                          for i in range(0, len(message), packet_size)]
