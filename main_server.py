@@ -21,7 +21,6 @@ def run_server(packet_size):
     while True:
         final_packet_size = packet_size+2
         client_received_msg = conn.recv(final_packet_size)
-        # client_orginal_msg = client_received_msg.decode()
         splitted_msg = client_received_msg.decode().split('|')
         client_message += splitted_msg[0]
         try:
@@ -35,7 +34,6 @@ def run_server(packet_size):
         message = str(input_message)
         message_parts = [message[i:i+packet_size]
                          for i in range(0, len(message), packet_size)]
-        # for index in range(0, len(message_parts)):
         for index, value in enumerate(message_parts):
             final_message_parts = ''
             if message_parts[index] != message_parts[len(message_parts) - 1]:
